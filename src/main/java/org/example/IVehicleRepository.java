@@ -7,4 +7,7 @@ interface IVehicleRepository {
     void returnCar(String id);
     List<Vehicle> getVehicles();
     void saveVehicles();
+    void addVehicle(Vehicle vehicle);
+    void removeVehicle(String vehicleId);
+
 }

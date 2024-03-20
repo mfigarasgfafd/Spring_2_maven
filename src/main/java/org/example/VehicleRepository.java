@@ -86,4 +86,15 @@ class VehicleRepository implements IVehicleRepository {
             e.printStackTrace();
         }
     }
+    @Override
+    public void addVehicle(Vehicle vehicle) {
+        vehicles.add(vehicle);
+        saveVehicles();
+    }
+    @Override
+    public void removeVehicle(String vehicleId) {
+        vehicles.removeIf(v -> v.getId().equals(vehicleId));
+        saveVehicles();
+    }
+
 }
