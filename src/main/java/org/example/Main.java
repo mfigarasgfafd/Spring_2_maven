@@ -36,10 +36,19 @@ public class Main {
                     System.out.println("Hasło poprawne!");
 
 
-
-                    // tutaj znowu jak wczesniej wypozyczanie etc
-
-
+                    System.out.println("Wybierz działanie:");
+                    System.out.println("1 - Wypożycz pojazd");
+                    int action = scanner.nextInt();
+                    scanner.nextLine(); // Consuming the newline character
+                    switch (action) {
+                        case 1:
+                            System.out.println("Podaj numer ID pojazdu, który chcesz wypożyczyć:");
+                            String vehicleId = scanner.nextLine();
+                            vehicleRepository.rentCar(vehicleId);
+                            break;
+                        default:
+                            System.out.println("Nieprawidłowy wybór.");
+                    }
 
 
                 } else {
