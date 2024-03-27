@@ -8,4 +8,5 @@ public interface IUserRepository {
     User getUser(String login);
     List<User> getUsers();
     void save();
+    void updateRentedVehicleID(String login, String rentedVehicleID);
 }

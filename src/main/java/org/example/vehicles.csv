@@ -1,4 +1,4 @@
 1;Car;Toyota;Corolla;1900;2.0;true;
 2;Car;carBrand;1;2222;400.0;true;
-3;Motorcycle;bikeBrand;ye;2028;12200.0;false;cat1;
+3;Motorcycle;bikeBrand;ye;2028;12200.0;true;cat1;
 4;Car;carBrand;2;1922;200.0;false;

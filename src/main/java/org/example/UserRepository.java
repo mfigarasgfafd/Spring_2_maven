@@ -1,8 +1,6 @@
 package org.example;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,8 +21,8 @@ class UserRepository implements IUserRepository {
         try (Scanner scanner = new Scanner(new File(filePath))) {
             while (scanner.hasNextLine()) {
                 String[] data = scanner.nextLine().split(";");
-                if (data.length == 2) {
-                    User user = new User(data[0], data[1], "", ""); // Tworzymy użytkownika z loginem, hasłem i pustymi polami role i wypożyczonego pojazdu
+                if (data.length == 3) {
+                    User user = new User(data[0], data[1], "", data[2]); // Tworzymy użytkownika z loginem, hasłem, pustym polem roli i wypożyczonym pojazdem
                     users.add(user);
                 } else {
                     System.err.println("Niepoprawny format danych w pliku CSV: " + Arrays.toString(data));
@@ -34,6 +32,7 @@ class UserRepository implements IUserRepository {
             e.printStackTrace();
         }
     }
+
 
 
 
@@ -62,4 +61,31 @@ class UserRepository implements IUserRepository {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void updateRentedVehicleID(String login, String rentedVehicleID) {
+        List<String> fileContent = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split(";");
+                if (parts.length >= 2 && parts[0].equals(login)) {
+                    parts[2] = rentedVehicleID;
+                    line = String.join(";", parts);
+                }
+                fileContent.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (PrintWriter pw = new PrintWriter(new FileWriter(filePath))) {
+            for (String line : fileContent) {
+                pw.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
